@@ -120,7 +120,7 @@
             </tr>
         </thead>
         <tbody id="subjects-table">
-            <!-- يتم توليد المواد آلياً عبر الجافاسكربت -->
+            <!-- سيتم بناء الجدول آلياً بتعديلاتك الدقيقة -->
         </tbody>
     </table>
 
@@ -130,23 +130,23 @@
 </div>
 
 <script>
-    // هيكلة مقاييس السداسي الثاني بناءً على وثائق كشف النقاط (1000202764.png و 1000202765.png)
+    // توزيع المواد الجديد والنهائي بناءً على تعديلاتك الصحيحة تماماً
     const subjects = [
         { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, hasTd: false, hasExam: true },
+        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, hasTd: true, hasExam: true },
         { name: "منهجية البحث العلمي (Méthodologie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "إحصاء استدلالي (Statistiques inférentielle)", coeff: 2, hasTd: true, hasExam: true },
         { name: "تاريخ الجزائر 2", coeff: 1, hasTd: false, hasExam: true },
         { name: "البحث الوثائقي 2", coeff: 1, hasTd: false, hasExam: true },
         { name: "لغة إنجليزية", coeff: 1, hasTd: true, hasExam: false },
         { name: "مدخل إلى البرمجة والذكاء الاصطناعي", coeff: 1, hasTd: true, hasExam: false },
-        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, hasTd: false, hasExam: true }
+        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, hasTd: true, hasExam: true }
     ];
 
     const tableBody = document.getElementById('subjects-table');
 
-    // بناء الجدول برمجياً بشكل مرن
+    // إنشاء أسطر الجدول
     subjects.forEach((sub, index) => {
         let typeText = (sub.hasTd && sub.hasExam) ? "محاضرة + TD" : (sub.hasTd ? "TD فقط" : "محاضرة فقط");
         
@@ -171,7 +171,7 @@
         tableBody.innerHTML += row;
     });
 
-    // حساب معدل المادة الفردية بدقة متناهية فور الكتابة
+    // حساب معدل المادة الواحدة بدقة
     function updateRow(index) {
         const sub = subjects[index];
         let finalScore = 0;
@@ -179,6 +179,7 @@
         if (sub.hasTd && sub.hasExam) {
             const td = parseFloat(document.getElementById(`td-${index}`).value) || 0;
             const exam = parseFloat(document.getElementById(`exam-${index}`).value) || 0;
+            // احتساب قاعدة الـ 40% والـ 60%
             finalScore = (td * 0.4) + (exam * 0.6);
         } else if (sub.hasTd) {
             finalScore = parseFloat(document.getElementById(`td-${index}`).value) || 0;
@@ -197,7 +198,7 @@
         return finalScore;
     }
 
-    // حساب المعدل العام للسداسي الثاني
+    // حساب المعدل الإجمالي للسداسي
     function calculateGPA() {
         let totalPoints = 0;
         let totalCoeffs = 0;
@@ -214,14 +215,13 @@
 
         if (gpa >= 10) {
             resultBox.className = "result-box pass";
-            resultBox.innerHTML = `المعدل الفصلي النهائي (السداسي 2): ${gpa.toFixed(2)} / 20 <br> الحالة العامة وحدة السداسي: ناجح ومقبول 🟢`;
+            resultBox.innerHTML = `المعدل الفصلي النهائي (السداسي 2): ${gpa.toFixed(2)} / 20 <br> الحالة العامة: ناجح ومقبول 🟢`;
         } else {
             resultBox.className = "result-box fail";
-            resultBox.innerHTML = `المعدل الفصلي النهائي (السداسي 2): ${gpa.toFixed(2)} / 20 <br> الحالة العامة وحدة السداسي: راسب (دورة استدراكية) 🔴`;
+            resultBox.innerHTML = `المعدل الفصلي النهائي (السداسي 2): ${gpa.toFixed(2)} / 20 <br> الحالة العامة: راسب (دورة استدراكية) 🔴`;
         }
     }
 </script>
 
 </body>
 </html>
-
