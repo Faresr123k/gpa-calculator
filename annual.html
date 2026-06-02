@@ -145,9 +145,9 @@
     <h1>الحاسبة الجامعية الشاملة لمعدل السنة</h1>
     <h3>جامعة الجزائر 2 - كلية العلوم الاجتماعية</h3>
     
-    <!-- السداسي الأول المصحح بناءً على الصورة 1000202764.png -->
+    <!-- السداسي الأول المصحح بالكامل مع المواد الاستكشافية -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الأول الفعليه</h2>
+        <h2 class="semester-title">📊 مواد السداسي الأول (البرنامج الكامل)</h2>
         <table>
             <thead>
                 <tr>
@@ -165,7 +165,7 @@
 
     <!-- السداسي الثاني الدقيق والمطابق بالكامل -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الثاني الدقيقة</h2>
+        <h2 class="semester-title">📊 مواد السداسي الثاني</h2>
         <table>
             <thead>
                 <tr>
@@ -202,7 +202,7 @@
 </div>
 
 <script>
-    // 1. هيكل السداسي الأول الحقيقي المستخرج من صورتك (1000202764.png)
+    // 1. هيكل السداسي الأول الكامل والمصحح (8 مواد بتيدي + مادتين بمحاضرة فقط)
     const s1Subjects = [
         { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, hasTd: true, hasExam: true },
@@ -211,7 +211,9 @@
         { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "لغة إنجليزية (Anglais)", coeff: 1, hasTd: true, hasExam: false },
-        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, hasTd: true, hasExam: true }
+        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "تاريخ الجزائر الثقافي والاجتماعي 1", coeff: 1, hasTd: false, hasExam: true },
+        { name: "البحث الوثائقي 1", coeff: 1, hasTd: false, hasExam: true }
     ];
 
     // 2. هيكل السداسي الثاني الدقيق والمصحح تماماً
