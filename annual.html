@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الحاسبة الشاملة للمعدل السنوي - علوم اجتماعية</title>
+    <title>الحاسبة الجامعية الرسمية والنهائية للمعدل السنوي</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -145,9 +145,9 @@
     <h1>الحاسبة الجامعية الشاملة لمعدل السنة</h1>
     <h3>جامعة الجزائر 2 - كلية العلوم الاجتماعية</h3>
     
-    <!-- السداسي الأول -->
+    <!-- السداسي الأول المصحح بناءً على الصورة 1000202764.png -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الأول</h2>
+        <h2 class="semester-title">📊 مواد السداسي الأول الفعليه</h2>
         <table>
             <thead>
                 <tr>
@@ -163,9 +163,9 @@
         </table>
     </div>
 
-    <!-- السداسي الثاني -->
+    <!-- السداسي الثاني الدقيق والمطابق بالكامل -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الثاني</h2>
+        <h2 class="semester-title">📊 مواد السداسي الثاني الدقيقة</h2>
         <table>
             <thead>
                 <tr>
@@ -202,21 +202,19 @@
 </div>
 
 <script>
-    // 1. هيكل السداسي الأول الافتراضي للعلوم الاجتماعية
+    // 1. هيكل السداسي الأول الحقيقي المستخرج من صورتك (1000202764.png)
     const s1Subjects = [
-        { name: "مدخل إلى علم النفس", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علم الاجتماع", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى الفلسفة", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علوم الإعلام والاتصال", coeff: 2, hasTd: false, hasExam: true },
-        { name: "تاريخ الجزائر الثقافي والاجتماعي 1", coeff: 1, hasTd: false, hasExam: true },
-        { name: "مناهج وتقنيات البحث العلمي 1", coeff: 2, hasTd: true, hasExam: true },
-        { name: "إحصاء وصفي", coeff: 2, hasTd: true, hasExam: true },
-        { name: "لغة أجنبية (فرنسية/إنجليزية)", coeff: 1, hasTd: true, hasExam: false },
-        { name: "مجتمع المعلومات الرقمي", coeff: 1, hasTd: false, hasExam: true },
-        { name: "البحث الوثائقي 1", coeff: 1, hasTd: false, hasExam: true }
+        { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "إحصاء وصفي (Statistique descriptive)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "مدخل إلى المصادر المفتوحة والوصول الحر (Open Source)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, hasTd: true, hasExam: true },
+        { name: "لغة إنجليزية (Anglais)", coeff: 1, hasTd: true, hasExam: false },
+        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, hasTd: true, hasExam: true }
     ];
 
-    // 2. هيكل السداسي الثاني الدقيق والمصحح بناءً على طلبك الاخير
+    // 2. هيكل السداسي الثاني الدقيق والمصحح تماماً
     const s2Subjects = [
         { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, hasTd: true, hasExam: true },
         { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, hasTd: true, hasExam: true },
@@ -230,9 +228,10 @@
         { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, hasTd: true, hasExam: true }
     ];
 
-    // دالة لبناء الجداول تلقائياً عند تحميل الصفحة
+    // دالة بناء جداول المواد برمجياً
     function buildTable(list, tableId, prefix) {
         const tbody = document.getElementById(tableId);
+        tbody.innerHTML = ""; // تصفية الجدول
         list.forEach((sub, index) => {
             let typeText = (sub.hasTd && sub.hasExam) ? "محاضرة + TD" : (sub.hasTd ? "TD فقط" : "محاضرة فقط");
             
@@ -262,13 +261,13 @@
     buildTable(s1Subjects, 's1-table', 's1');
     buildTable(s2Subjects, 's2-table', 's2');
 
-    // تحديث حساب السطر الفردي أثناء الكتابة
+    // حساب درجة السطر الفردي
     function updateRowScore(prefix, index, hasTd, hasExam) {
         let finalScore = 0;
         if (hasTd && hasExam) {
             const td = parseFloat(document.getElementById(`${prefix}-td-${index}`).value) || 0;
             const exam = parseFloat(document.getElementById(`${prefix}-exam-${index}`).value) || 0;
-            finalScore = (td * 0.4) + (exam * 0.6); // 40% TD و 60% امتحان
+            finalScore = (td * 0.4) + (exam * 0.6);
         } else if (hasTd) {
             finalScore = parseFloat(document.getElementById(`${prefix}-td-${index}`).value) || 0;
         } else if (hasExam) {
@@ -281,9 +280,9 @@
         return finalScore;
     }
 
-    // حساب المعدلات التراكمية للفصلين والمعدل السنوي الإجمالي
+    // الحساب السنوي الكلي والشامل للفرعين
     function calculateAnnualGPA() {
-        // حساب السداسي الأول
+        // حساب السداسي 1
         let s1Points = 0, s1Coeffs = 0;
         s1Subjects.forEach((sub, index) => {
             let score = updateRowScore('s1', index, sub.hasTd, sub.hasExam);
@@ -292,7 +291,7 @@
         });
         const s1GPA = s1Points / s1Coeffs;
 
-        // حساب السداسي الثاني
+        // حساب السداسي 2
         let s2Points = 0, s2Coeffs = 0;
         s2Subjects.forEach((sub, index) => {
             let score = updateRowScore('s2', index, sub.hasTd, sub.hasExam);
@@ -301,10 +300,9 @@
         });
         const s2GPA = s2Points / s2Coeffs;
 
-        // حساب المعدل السنوي النهائي (معدل س1 + معدل س2 تقسيم 2)
+        // المعدل السنوي المشترك
         const annualGPA = (s1GPA + s2GPA) / 2;
 
-        // عرض النتائج في الكرت المخصص
         document.getElementById('s1-gpa-val').innerText = s1GPA.toFixed(2);
         document.getElementById('s1-gpa-val').className = s1GPA >= 10 ? "text-pass" : "text-fail";
         
@@ -317,12 +315,10 @@
             finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> 🎉 مبروك النجاح والانتقال للسنة الثانية! 🎉`;
         } else {
             finalBox.style.backgroundColor = "#dc3545";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ الحالة: راسب (بانتظار الدورة الاستدراكية) ⚠️`;
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ الحالة: راسب (بانتظار الدورة الاستدراكية أو صب النقاط) ⚠️`;
         }
 
         document.getElementById('result-section').style.display = "block";
-        
-        // الانتقال تلقائياً لأسفل الشاشة لرؤية النتيجة المباشرة
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 </script>
