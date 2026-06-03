@@ -110,16 +110,28 @@
             border-radius: 6px;
             border: 1px solid #ddd;
             text-align: center;
-            min-width: 200px;
+            min-width: 220px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         .res-box span {
             display: block;
             font-size: 14px;
             color: #666;
+            margin-bottom: 5px;
         }
         .res-box strong {
-            font-size: 20px;
+            font-size: 22px;
             color: #333;
+        }
+        .res-credit-badge {
+            margin-top: 8px;
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #444;
         }
         .final-box {
             text-align: center;
@@ -130,6 +142,7 @@
             font-size: 24px;
             font-weight: bold;
             line-height: 1.6;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .text-pass { color: #28a745; font-weight: bold; }
         .text-fail { color: #dc3545; font-weight: bold; }
@@ -184,29 +197,32 @@
         </table>
     </div>
 
-    <button class="btn-calc" onclick="calculateAnnualGPA()">✨ احسب المعدل العام والأرصدة المستحقة ✨</button>
+    <button class="btn-calc" onclick="calculateAnnualGPA()">✨ احسب المعدلات والأرصدة التفصيلية والنهائية ✨</button>
 
     <div id="result-section" class="result-card" style="display:none;">
         <div class="result-grid">
             <div class="res-box">
-                <span>معدل وأرصدة السداسي 1</span>
+                <span>معدل السداسي 1</span>
                 <strong id="s1-gpa-val">0.00</strong>
-                <div id="s1-credit-val" style="font-size:14px; color:#555; margin-top:5px;">الأرصدة: 0 / 30</div>
+                <div>
+                    <span class="res-credit-badge" id="s1-credit-val">رصيد السداسي 1: 0 / 30</span>
+                </div>
             </div>
             <div class="res-box">
-                <span>معدل وأرصدة السداسي 2</span>
+                <span>معدل السداسي 2</span>
                 <strong id="s2-gpa-val">0.00</strong>
-                <div id="s2-credit-val" style="font-size:14px; color:#555; margin-top:5px;">الأرصدة: 0 / 30</div>
+                <div>
+                    <span class="res-credit-badge" id="s2-credit-val">رصيد السداسي 2: 0 / 30</span>
+                </div>
             </div>
         </div>
         <div id="final-annual-box" class="final-box">
-            المعدل السنوي العام النهائي: 0.00 / 20 <br> مجموع الأرصدة السنوية: 0 / 60
+            المعدل السنوي العام النهائي: 0.00 / 20 <br> مجموع الأرصدة السنوية الإجمالية: 0 / 60
         </div>
     </div>
 </div>
 
 <script>
-    // توزيع المواد مع المعاملات والأرصدة الرسمية لجامعة الجزائر 2
     const s1Subjects = [
         { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, credit: 3, hasTd: true, hasExam: true },
         { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
@@ -282,7 +298,6 @@
         cell.innerText = finalScore.toFixed(2);
         cell.className = finalScore >= 10 ? "text-pass" : "text-fail";
 
-        // تحديث الرصيد الفردي مؤقتاً للمادة
         const creditCell = document.getElementById(`${prefix}-creditgain-${index}`);
         if (finalScore >= 10) {
             creditCell.innerText = originalCredit;
@@ -305,7 +320,7 @@
             if (score >= 10) s1IndividualCredits += sub.credit;
         });
         const s1GPA = s1Points / s1Coeffs;
-        // قانون الـ LMD: إذا نجحت في السداسي تأخذ 30 رصيداً كاملاً، وإلا تأخذ أرصدة المواد الناجحة فقط
+        // نظام LMD: معدل السداسي >= 10 يعني كسب الـ 30 رصيداً كاملة دفعة واحدة، وإلا تحسب الأرصدة الفردية للمواد الناجحة فقط
         const s1FinalCredits = s1GPA >= 10 ? 30 : s1IndividualCredits;
 
         // حساب السداسي 2 ومجموع أرصدته الفردية
@@ -322,30 +337,36 @@
         // الحساب السنوي العام
         const annualGPA = (s1GPA + s2GPA) / 2;
         
-        // حساب الأرصدة السنوية الإجمالية: إذا كان المعدل السنوي فوق 10 تأخذ 60 رصيداً، وإلا تجمع أرصدة السداسيين
+        // حساب الأرصدة السنوية النهائية: معدل سنوي >= 10 يعني كسب 60 رصيداً، وإلا نجمع رصيدي السداسيين المكتسبين
         const annualTotalCredits = annualGPA >= 10 ? 60 : (s1FinalCredits + s2FinalCredits);
 
-        // صب البيانات في واجهة النتائج
+        // طباعة وعرض النتائج على الواجهة
         document.getElementById('s1-gpa-val').innerText = s1GPA.toFixed(2);
         document.getElementById('s1-gpa-val').className = s1GPA >= 10 ? "text-pass" : "text-fail";
-        document.getElementById('s1-credit-val').innerText = `الأرصدة المكتسبة: ${s1FinalCredits} / 30`;
+        
+        const s1CreditBadge = document.getElementById('s1-credit-val');
+        s1CreditBadge.innerText = `رصيد السداسي 1: ${s1FinalCredits} / 30`;
+        s1CreditBadge.style.color = s1GPA >= 10 ? "#28a745" : "#dc3545";
 
         document.getElementById('s2-gpa-val').innerText = s2GPA.toFixed(2);
         document.getElementById('s2-gpa-val').className = s2GPA >= 10 ? "text-pass" : "text-fail";
-        document.getElementById('s2-credit-val').innerText = `الأرصدة المكتسبة: ${s2FinalCredits} / 30`;
+        
+        const s2CreditBadge = document.getElementById('s2-credit-val');
+        s2CreditBadge.innerText = `رصيد السداسي 2: ${s2FinalCredits} / 30`;
+        s2CreditBadge.style.color = s2GPA >= 10 ? "#28a745" : "#dc3545";
 
         const finalBox = document.getElementById('final-annual-box');
         if (annualGPA >= 10) {
             finalBox.style.backgroundColor = "#28a745";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> 🎯 مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 🎯 <br> 🎉 مبروك النجاح والانتقال للسنة الثانية بالكامل! 🎉`;
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> 🎯 مجموع الأرصدة السنوية الإجمالية: ${annualTotalCredits} / 60 🎯 <br> 🎉 مبروك النجاح والقبول المباشر في السنة الثانية! 🎉`;
         } else if (annualTotalCredits >= 45) {
             finalBox.style.backgroundColor = "#ffc107";
             finalBox.style.color = "#333";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 ⚠️ <br> 💡 الحالة: انتقال بالديون (تجاوزت 45 رصيداً وتنتقل للسنة الثانية مع حمل المواد الراسبة) 💡`;
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ مجموع الأرصدة السنوية الإجمالية: ${annualTotalCredits} / 60 ⚠️ <br> 💡 الحالة: انتقال بالديون (جمعت 45 رصيداً فأكثر، تنتقل للسنة الثانية مع إعادة المواد الراسبة) 💡`;
         } else {
             finalBox.style.backgroundColor = "#dc3545";
             finalBox.style.color = "white";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ❌ مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 ❌ <br> الحالة: راسب (بانتظار الدورة الاستدراكية لرفع الأرصدة والمعدل)`;
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ❌ مجموع الأرصدة السنوية الإجمالية: ${annualTotalCredits} / 60 ❌ <br> الحالة: راسب (بانتظار الدورة الاستدراكية لتحسين المعدل والأرصدة)`;
         }
 
         document.getElementById('result-section').style.display = "block";
@@ -355,4 +376,3 @@
 
 </body>
 </html>
-
