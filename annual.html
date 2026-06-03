@@ -208,29 +208,29 @@
 <script>
     // توزيع المواد مع المعاملات والأرصدة الرسمية لجامعة الجزائر 2
     const s1Subjects = [
-        { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "إحصاء وصفي (Statistique descriptive)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
-        { name: "مدخل إلى المصادر المفتوحة والوصول الحر (Open Source)", coeff: 2, credit: 4, hasTd: true, hasExam: false },
-        { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "لغة إنجليزية (Anglais)", coeff: 1, credit: 2, hasTd: true, hasExam: false },
-        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, credit: 1, hasTd: true, hasExam: true },
+        { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, credit: 3, hasTd: true, hasExam: true },
+        { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "إحصاء وصفي (Statistique descriptive)", coeff: 2, credit: 3, hasTd: true, hasExam: true },
+        { name: "مدخل إلى المصادر المفتوحة والوصول الحر (Open Source)", coeff: 1, credit: 1, hasTd: true, hasExam: false },
+        { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "لغة إنجليزية (Anglais)", coeff: 1, credit: 1, hasTd: true, hasExam: false },
+        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
         { name: "تاريخ الجزائر الثقافي والاجتماعي 1", coeff: 1, credit: 1, hasTd: false, hasExam: true },
         { name: "البحث الوثائقي 1", coeff: 1, credit: 1, hasTd: false, hasExam: true }
     ];
 
     const s2Subjects = [
-        { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
-        { name: "منهجية البحث العلمي (Méthodologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
-        { name: "إحصاء استدلالي (Statistiques inférentielle)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "منهجية البحث العلمي (Méthodologie)", coeff: 2, credit: 3, hasTd: true, hasExam: true },
+        { name: "إحصاء استدلالي (Statistiques inférentielle)", coeff: 2, credit: 3, hasTd: true, hasExam: true },
         { name: "تاريخ الجزائر 2", coeff: 1, credit: 1, hasTd: false, hasExam: true },
         { name: "البحث الوثائقي 2", coeff: 1, credit: 1, hasTd: false, hasExam: true },
-        { name: "لغة إنجليزية", coeff: 1, credit: 2, hasTd: true, hasExam: false },
-        { name: "مدخل إلى البرمجة والذكاء الاصطناعي", coeff: 1, credit: 3, hasTd: true, hasExam: false },
-        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, credit: 2, hasTd: true, hasExam: true }
+        { name: "لغة إنجليزية", coeff: 1, credit: 1, hasTd: true, hasExam: false },
+        { name: "مدخل إلى البرمجة والذكاء الاصطناعي", coeff: 1, credit: 1, hasTd: true, hasExam: false },
+        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, credit: 5, hasTd: true, hasExam: true }
     ];
 
     function buildTable(list, tableId, prefix) {
