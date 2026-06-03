@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الحاسبة الجامعية الرسمية والنهائية للمعدل السنوي</title>
+    <title>الحاسبة الجامعية الرسمية بالأرصدة والمعدل السنوي</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +13,7 @@
             color: #333;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
             background: #fff;
             padding: 30px;
@@ -110,7 +110,7 @@
             border-radius: 6px;
             border: 1px solid #ddd;
             text-align: center;
-            min-width: 150px;
+            min-width: 200px;
         }
         .res-box span {
             display: block;
@@ -129,6 +129,7 @@
             border-radius: 6px;
             font-size: 24px;
             font-weight: bold;
+            line-height: 1.6;
         }
         .text-pass { color: #28a745; font-weight: bold; }
         .text-fail { color: #dc3545; font-weight: bold; }
@@ -142,129 +143,130 @@
 <body>
 
 <div class="container">
-    <h1>الحاسبة الجامعية الشاملة لمعدل السنة</h1>
+    <h1>الحاسبة الجامعية الرسمية (المعدلات والأرصدة)</h1>
     <h3>جامعة الجزائر 2 - كلية العلوم الاجتماعية</h3>
     
-    <!-- السداسي الأول المصحح بالكامل مع المواد الاستكشافية -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الأول (البرنامج الكامل)</h2>
+        <h2 class="semester-title">📊 السداسي الأول (المواد والمعاملات والأرصدة)</h2>
         <table>
             <thead>
                 <tr>
                     <th>المقياس</th>
                     <th>نوع المادة</th>
                     <th>المعامل</th>
+                    <th>الرصيد الأصلي</th>
                     <th>تقييم مستمر (TD)</th>
                     <th>الامتحان الرئيسي</th>
                     <th>معدل المادة</th>
+                    <th>الرصيد المكتسب</th>
                 </tr>
             </thead>
             <tbody id="s1-table"></tbody>
         </table>
     </div>
 
-    <!-- السداسي الثاني الدقيق والمطابق بالكامل -->
     <div class="semester-section">
-        <h2 class="semester-title">📊 مواد السداسي الثاني</h2>
+        <h2 class="semester-title">📊 السداسي الثاني (المواد والمعاملات والأرصدة)</h2>
         <table>
             <thead>
                 <tr>
                     <th>المقياس</th>
                     <th>نوع المادة</th>
                     <th>المعامل</th>
+                    <th>الرصيد الأصلي</th>
                     <th>تقييم مستمر (TD)</th>
                     <th>الامتحان الرئيسي</th>
                     <th>معدل المادة</th>
+                    <th>الرصيد المكتسب</th>
                 </tr>
             </thead>
             <tbody id="s2-table"></tbody>
         </table>
     </div>
 
-    <button class="btn-calc" onclick="calculateAnnualGPA()">✨ احسب المعدل السنوي العام ✨</button>
+    <button class="btn-calc" onclick="calculateAnnualGPA()">✨ احسب المعدل العام والأرصدة المستحقة ✨</button>
 
-    <!-- صندوق النتائج المدمج -->
     <div id="result-section" class="result-card" style="display:none;">
         <div class="result-grid">
             <div class="res-box">
-                <span>معدل السداسي 1</span>
+                <span>معدل وأرصدة السداسي 1</span>
                 <strong id="s1-gpa-val">0.00</strong>
+                <div id="s1-credit-val" style="font-size:14px; color:#555; margin-top:5px;">الأرصدة: 0 / 30</div>
             </div>
             <div class="res-box">
-                <span>معدل السداسي 2</span>
+                <span>معدل وأرصدة السداسي 2</span>
                 <strong id="s2-gpa-val">0.00</strong>
+                <div id="s2-credit-val" style="font-size:14px; color:#555; margin-top:5px;">الأرصدة: 0 / 30</div>
             </div>
         </div>
         <div id="final-annual-box" class="final-box">
-            المعدل السنوي العام: 0.00 / 20
+            المعدل السنوي العام النهائي: 0.00 / 20 <br> مجموع الأرصدة السنوية: 0 / 60
         </div>
     </div>
 </div>
 
 <script>
-    // 1. هيكل السداسي الأول الكامل والمصحح (8 مواد بتيدي + مادتين بمحاضرة فقط)
+    // توزيع المواد مع المعاملات والأرصدة الرسمية لجامعة الجزائر 2
     const s1Subjects = [
-        { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "إحصاء وصفي (Statistique descriptive)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى المصادر المفتوحة والوصول الحر (Open Source)", coeff: 1, hasTd: true, hasExam: false },
-        { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "لغة إنجليزية (Anglais)", coeff: 1, hasTd: true, hasExam: false },
-        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "تاريخ الجزائر الثقافي والاجتماعي 1", coeff: 1, hasTd: false, hasExam: true },
-        { name: "البحث الوثائقي 1", coeff: 1, hasTd: false, hasExam: true }
+        { name: "إبستمولوجيا العلوم الاجتماعية (Épistémologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "مدخل إلى الأنثروبولوجيا (Introduction à L'Anthropologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "إحصاء وصفي (Statistique descriptive)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "مدخل إلى المصادر المفتوحة والوصول الحر (Open Source)", coeff: 2, credit: 4, hasTd: true, hasExam: false },
+        { name: "مدخل إلى علم الاجتماع (Introduction à La Sociologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علم النفس (Introduction à la psychologie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "لغة إنجليزية (Anglais)", coeff: 1, credit: 2, hasTd: true, hasExam: false },
+        { name: "مدخل إلى الفلسفة (Introduction à La Philosophie)", coeff: 2, credit: 1, hasTd: true, hasExam: true },
+        { name: "تاريخ الجزائر الثقافي والاجتماعي 1", coeff: 1, credit: 1, hasTd: false, hasExam: true },
+        { name: "البحث الوثائقي 1", coeff: 1, credit: 1, hasTd: false, hasExam: true }
     ];
 
-    // 2. هيكل السداسي الثاني الدقيق والمصحح تماماً
     const s2Subjects = [
-        { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "منهجية البحث العلمي (Méthodologie)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "إحصاء استدلالي (Statistiques inférentielle)", coeff: 2, hasTd: true, hasExam: true },
-        { name: "تاريخ الجزائر 2", coeff: 1, hasTd: false, hasExam: true },
-        { name: "البحث الوثائقي 2", coeff: 1, hasTd: false, hasExam: true },
-        { name: "لغة إنجليزية", coeff: 1, hasTd: true, hasExam: false },
-        { name: "مدخل إلى البرمجة والذكاء الاصطناعي", coeff: 1, hasTd: true, hasExam: false },
-        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, hasTd: true, hasExam: true }
+        { name: "مدخل إلى علم السكان (Démographie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "مدخل إلى الأرطوفونيا (L'Orthophonie)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "مدخل إلى علوم التربية (Sciences de l'éducation)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "منهجية البحث العلمي (Méthodologie)", coeff: 2, credit: 5, hasTd: true, hasExam: true },
+        { name: "إحصاء استدلالي (Statistiques inférentielle)", coeff: 2, credit: 4, hasTd: true, hasExam: true },
+        { name: "تاريخ الجزائر 2", coeff: 1, credit: 1, hasTd: false, hasExam: true },
+        { name: "البحث الوثائقي 2", coeff: 1, credit: 1, hasTd: false, hasExam: true },
+        { name: "لغة إنجليزية", coeff: 1, credit: 2, hasTd: true, hasExam: false },
+        { name: "مدخل إلى البرمجة والذكاء الاصطناعي", coeff: 1, credit: 3, hasTd: true, hasExam: false },
+        { name: "تيارات فكرية كبرى (Grands courants)", coeff: 2, credit: 2, hasTd: true, hasExam: true }
     ];
 
-    // دالة بناء جداول المواد برمجياً
     function buildTable(list, tableId, prefix) {
         const tbody = document.getElementById(tableId);
-        tbody.innerHTML = ""; // تصفية الجدول
+        tbody.innerHTML = ""; 
         list.forEach((sub, index) => {
             let typeText = (sub.hasTd && sub.hasExam) ? "محاضرة + TD" : (sub.hasTd ? "TD فقط" : "محاضرة فقط");
             
             let tdInput = sub.hasTd 
-                ? `<input type="number" id="${prefix}-td-${index}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${prefix}', ${index}, ${sub.hasTd}, ${sub.hasExam})">` 
+                ? `<input type="number" id="${prefix}-td-${index}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${prefix}', ${index}, ${sub.hasTd}, ${sub.hasExam}, ${sub.credit})">` 
                 : `<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;
                 
             let examInput = sub.hasExam 
-                ? `<input type="number" id="${prefix}-exam-${index}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${prefix}', ${index}, ${sub.hasTd}, ${sub.hasExam})">` 
+                ? `<input type="number" id="${prefix}-exam-${index}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${prefix}', ${index}, ${sub.hasTd}, ${sub.hasExam}, ${sub.credit})">` 
                 : `<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;
             
             let row = `
                 <tr>
                     <td><strong>${sub.name}</strong></td>
                     <td><small style="color:#555;">${typeText}</small></td>
-                    <td><strong style="font-size:15px;">${sub.coeff}</strong></td>
+                    <td><strong>${sub.coeff}</strong></td>
+                    <td><span style="color:#777; font-weight:bold;">${sub.credit}</span></td>
                     <td>${tdInput}</td>
                     <td>${examInput}</td>
                     <td id="${prefix}-total-${index}" style="font-weight:bold;">0.00</td>
+                    <td id="${prefix}-creditgain-${index}" style="font-weight:bold; color:#666;">0</td>
                 </tr>
             `;
             tbody.innerHTML += row;
         });
     }
 
-    // بناء الجداول فورياً
     buildTable(s1Subjects, 's1-table', 's1');
     buildTable(s2Subjects, 's2-table', 's2');
 
-    // حساب درجة السطر الفردي
-    function updateRowScore(prefix, index, hasTd, hasExam) {
+    function updateRowScore(prefix, index, hasTd, hasExam, originalCredit) {
         let finalScore = 0;
         if (hasTd && hasExam) {
             const td = parseFloat(document.getElementById(`${prefix}-td-${index}`).value) || 0;
@@ -279,45 +281,71 @@
         const cell = document.getElementById(`${prefix}-total-${index}`);
         cell.innerText = finalScore.toFixed(2);
         cell.className = finalScore >= 10 ? "text-pass" : "text-fail";
+
+        // تحديث الرصيد الفردي مؤقتاً للمادة
+        const creditCell = document.getElementById(`${prefix}-creditgain-${index}`);
+        if (finalScore >= 10) {
+            creditCell.innerText = originalCredit;
+            creditCell.style.color = "#28a745";
+        } else {
+            creditCell.innerText = "0";
+            creditCell.style.color = "#dc3545";
+        }
+
         return finalScore;
     }
 
-    // الحساب السنوي الكلي والشامل للفرعين
     function calculateAnnualGPA() {
-        // حساب السداسي 1
-        let s1Points = 0, s1Coeffs = 0;
+        // حساب السداسي 1 ومجموع أرصدته الفردية
+        let s1Points = 0, s1Coeffs = 0, s1IndividualCredits = 0;
         s1Subjects.forEach((sub, index) => {
-            let score = updateRowScore('s1', index, sub.hasTd, sub.hasExam);
+            let score = updateRowScore('s1', index, sub.hasTd, sub.hasExam, sub.credit);
             s1Points += score * sub.coeff;
             s1Coeffs += sub.coeff;
+            if (score >= 10) s1IndividualCredits += sub.credit;
         });
         const s1GPA = s1Points / s1Coeffs;
+        // قانون الـ LMD: إذا نجحت في السداسي تأخذ 30 رصيداً كاملاً، وإلا تأخذ أرصدة المواد الناجحة فقط
+        const s1FinalCredits = s1GPA >= 10 ? 30 : s1IndividualCredits;
 
-        // حساب السداسي 2
-        let s2Points = 0, s2Coeffs = 0;
+        // حساب السداسي 2 ومجموع أرصدته الفردية
+        let s2Points = 0, s2Coeffs = 0, s2IndividualCredits = 0;
         s2Subjects.forEach((sub, index) => {
-            let score = updateRowScore('s2', index, sub.hasTd, sub.hasExam);
+            let score = updateRowScore('s2', index, sub.hasTd, sub.hasExam, sub.credit);
             s2Points += score * sub.coeff;
             s2Coeffs += sub.coeff;
+            if (score >= 10) s2IndividualCredits += sub.credit;
         });
         const s2GPA = s2Points / s2Coeffs;
+        const s2FinalCredits = s2GPA >= 10 ? 30 : s2IndividualCredits;
 
-        // المعدل السنوي المشترك
+        // الحساب السنوي العام
         const annualGPA = (s1GPA + s2GPA) / 2;
+        
+        // حساب الأرصدة السنوية الإجمالية: إذا كان المعدل السنوي فوق 10 تأخذ 60 رصيداً، وإلا تجمع أرصدة السداسيين
+        const annualTotalCredits = annualGPA >= 10 ? 60 : (s1FinalCredits + s2FinalCredits);
 
+        // صب البيانات في واجهة النتائج
         document.getElementById('s1-gpa-val').innerText = s1GPA.toFixed(2);
         document.getElementById('s1-gpa-val').className = s1GPA >= 10 ? "text-pass" : "text-fail";
-        
+        document.getElementById('s1-credit-val').innerText = `الأرصدة المكتسبة: ${s1FinalCredits} / 30`;
+
         document.getElementById('s2-gpa-val').innerText = s2GPA.toFixed(2);
         document.getElementById('s2-gpa-val').className = s2GPA >= 10 ? "text-pass" : "text-fail";
+        document.getElementById('s2-credit-val').innerText = `الأرصدة المكتسبة: ${s2FinalCredits} / 30`;
 
         const finalBox = document.getElementById('final-annual-box');
         if (annualGPA >= 10) {
             finalBox.style.backgroundColor = "#28a745";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> 🎉 مبروك النجاح والانتقال للسنة الثانية! 🎉`;
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> 🎯 مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 🎯 <br> 🎉 مبروك النجاح والانتقال للسنة الثانية بالكامل! 🎉`;
+        } else if (annualTotalCredits >= 45) {
+            finalBox.style.backgroundColor = "#ffc107";
+            finalBox.style.color = "#333";
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 ⚠️ <br> 💡 الحالة: انتقال بالديون (تجاوزت 45 رصيداً وتنتقل للسنة الثانية مع حمل المواد الراسبة) 💡`;
         } else {
             finalBox.style.backgroundColor = "#dc3545";
-            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ⚠️ الحالة: راسب (بانتظار الدورة الاستدراكية أو صب النقاط) ⚠️`;
+            finalBox.style.color = "white";
+            finalBox.innerHTML = `المعدل السنوي العام النهائي: ${annualGPA.toFixed(2)} / 20 <br> ❌ مجموع الأرصدة السنوية: ${annualTotalCredits} / 60 ❌ <br> الحالة: راسب (بانتظار الدورة الاستدراكية لرفع الأرصدة والمعدل)`;
         }
 
         document.getElementById('result-section').style.display = "block";
@@ -327,3 +355,4 @@
 
 </body>
 </html>
+
