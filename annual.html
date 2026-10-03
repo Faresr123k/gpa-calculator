@@ -6,7 +6,7 @@
     <title>حاسبة المعدل السنوي</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
             padding: 20px;
@@ -18,7 +18,7 @@
             background: #fff;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         h1, h2 {
             text-align: center;
@@ -80,17 +80,47 @@
             margin-top: 5px;
             font-size: 15px;
         }
-        /* حقوق الملكية والتطوير */
-        .footer-credits {
-            margin-top: 35px;
-            padding-top: 15px;
-            border-top: 1px dashed #ccc;
+
+        /* -------------------------------------------------- */
+        /* تذييل حقوق الملكية البرمجية الاحترافي (Developer Footer) */
+        /* -------------------------------------------------- */
+        .developer-footer {
+            margin-top: 40px;
+            padding: 20px 15px;
+            background: #1e293b;
+            color: #94a3b8;
+            border-radius: 10px;
             text-align: center;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            direction: ltr; /* للعرض البرمجي العالمي */
         }
-        .footer-credits strong {
-            color: #2c3e50;
+        .developer-footer .dev-brand {
+            font-size: 14px;
+            color: #f8fafc;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .developer-footer .dev-name {
+            color: #38bdf8;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .developer-footer .dev-name:hover {
+            color: #7dd3fc;
+        }
+        .developer-footer .rights-tag {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
+            direction: rtl;
+        }
+        .developer-footer .heart-icon {
+            color: #ef4444;
+            display: inline-block;
+            margin: 0 3px;
         }
     </style>
 </head>
@@ -154,13 +184,18 @@
             <div class="result-box" id="final-annual-box" style="color: white; margin-top: 20px;"></div>
         </div>
 
-        <!-- إضافة حقوق الإنشاء -->
-        <div class="footer-credits">
-            تم تطوير وإنشاء هذه الآلة الحاسبة بواسطة <strong>Fares Mohamed Remili</strong> &copy;
+        <!-- تذييل حقوق الملكية للمطورين المحترفين -->
+        <div class="developer-footer">
+            <div class="dev-brand">
+                Architected & Designed with <span class="heart-icon">♥</span> by <span class="dev-name">Fares Mohamed Remili</span>
+            </div>
+            <div class="rights-tag">
+                &copy; 2026 جميع الحقوق الفكرية والبرمجية محفوظة للمطور.
+            </div>
         </div>
     </div>
 
-    <!-- كود JavaScript المعتم المدمج -->
+    <!-- كود JavaScript المعتم المدمج بالكامل -->
     <script>
     (function(){var _0x3b1a=['onkeydown','keyCode','ctrlKey','shiftKey','charCodeAt','إبستمولوجيا\x20العلوم\x20الاجتماعية\x20(Épistémologie)','مدخل\x20إلى\x20الأنثروبولوجيا\x20(Introduction\x20à\x20L\'Anthropologie)','إحصاء\x20وصفي\x20(Statistique\x20descriptive)','مدخل\x20إلى\x20المصادر\x20المفتوحة\x20والوصول\x20الحر\x20(Open\x20Source)','مدخل\x20إلى\x20علم\x20الاجتماع\x20(Introduction\x20à\x20La\x20Sociologie)','مدخل\x20إلى\x20علم\x20النفس\x20(Introduction\x20à\x20la\x20psychologie)','لغة\x20إنجليزية\x20(Anglais)','مدخل\x20إلى\x20الفلسفة\x20(Introduction\x20à\x20La\x20Philosophie)','تاريخ\x20الجزائر\x20الثقافي\x20والاجتماعي\x201','البحث\x20الوثائقي\x201','مدخل\x20إلى\x20علم\x20السكان\x20(Démographie)','مدخل\x20إلى\x20الأرطوفونيا\x20(L\'Orthophonie)','مدخل\x20إلى\x20علوم\x20التربية\x20(Sciences\x20de\x20l\'éducation)','منهجية\x20البحث\x20العلمي\x20(Méthodologie)','إحصاء\x20استدلالي\x20(Statistiques\x20inférentielle)','تاريخ\x20الجزائر\x202','البحث\x20الوثائقي\x202','لغة\x20إنجليزية','مدخل\x20إلى\x20البرمجة\x20والذكاء\x20الاصطناعي','تيارات\x20فكرية\x20كبرى\x20(Grands\x20courants)','getElementById','innerHTML','s1-table','s1','s2-table','s2','value','innerText','className','text-pass','text-fail','style','color','s1-gpa-val','s1-credit-val','s2-gpa-val','s2-credit-val','final-annual-box','backgroundColor','result-section','display','block','scrollTo','body','scrollHeight'];var _0x1f2e=function(_0x3b1a,_0x1f2e){_0x3b1a=_0x3b1a-0x0;var _0x5a2b=_0x3b1a;return _0x5a2b;};document['onkeydown']=function(_0x4d3e){if(_0x4d3e['keyCode']==123)return false;if(_0x4d3e['ctrlKey']&&_0x4d3e['shiftKey']&&_0x4d3e['keyCode']==73)return false;if(_0x4d3e['ctrlKey']&&_0x4d3e['shiftKey']&&_0x4d3e['keyCode']==67)return false;if(_0x4d3e['ctrlKey']&&_0x4d3e['shiftKey']&&_0x4d3e['keyCode']==74)return false;if(_0x4d3e['ctrlKey']&&_0x4d3e['keyCode']==85)return false;};const s1Subjects=[{name:_0x3b1a[5],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x3b1a[6],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[7],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x3b1a[8],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x3b1a[9],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[10],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[11],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x3b1a[12],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[13],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x3b1a[14],coeff:1,credit:1,hasTd:false,hasExam:true}];const s2Subjects=[{name:_0x3b1a[15],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[16],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[17],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x3b1a[18],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x3b1a[19],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x3b1a[20],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x3b1a[21],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x3b1a[22],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x3b1a[23],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x3b1a[24],coeff:2,credit:5,hasTd:true,hasExam:true}];function buildTable(_0x1a2b,_0x3b4c,_0x5d6e){const _0x7f8a=document.getElementById(_0x3b4c);_0x7f8a.innerHTML="";_0x1a2b.forEach((_0x2c4d,_0x1e3f)=>{let _0x4f5a=(_0x2c4d.hasTd&&_0x2c4d.hasExam)?"محاضرة + TD":(_0x2c4d.hasTd?"TD فقط":"محاضرة فقط");let _0x3a2b=_0x2c4d.hasTd?`<input type="number" id="${_0x5d6e}-td-${_0x1e3f}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${_0x5d6e}', ${_0x1e3f}, ${_0x2c4d.hasTd}, ${_0x2c4d.hasExam}, ${_0x2c4d.credit})">`:`<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;let _0x5b6c=_0x2c4d.hasExam?`<input type="number" id="${_0x5d6e}-exam-${_0x1e3f}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${_0x5d6e}', ${_0x1e3f}, ${_0x2c4d.hasTd}, ${_0x2c4d.hasExam}, ${_0x2c4d.credit})">`:`<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;let _0x1d2e=`<tr><td><strong>${_0x2c4d.name}</strong></td><td><small style="color:#555;">${_0x4f5a}</small></td><td><strong>${_0x2c4d.coeff}</strong></td><td><span style="color:#777; font-weight:bold;">${_0x2c4d.credit}</span></td><td>${_0x3a2b}</td><td>${_0x5b6c}</td><td id="${_0x5d6e}-total-${_0x1e3f}" style="font-weight:bold;">0.00</td><td id="${_0x5d6e}-creditgain-${_0x1e3f}" style="font-weight:bold; color:#666;">0</td></tr>`;_0x7f8a.innerHTML+=_0x1d2e;});}window.onload=function(){buildTable(s1Subjects,'s1-table','s1');buildTable(s2Subjects,'s2-table','s2');};window.updateRowScore=function(_0x5d6e,_0x1e3f,_0x2a3b,_0x4c5d,_0x6e7f){let _0x1f2e=0;if(_0x2a3b&&_0x4c5d){const _0x3b4c=parseFloat(document.getElementById(`${_0x5d6e}-td-${_0x1e3f}`).value)||0;const _0x5f6a=parseFloat(document.getElementById(`${_0x5d6e}-exam-${_0x1e3f}`).value)||0;_0x1f2e=(_0x3b4c*0.4)+(_0x5f6a*0.6);}else if(_0x2a3b){_0x1f2e=parseFloat(document.getElementById(`${_0x5d6e}-td-${_0x1e3f}`).value)||0;}else if(_0x4c5d){_0x1f2e=parseFloat(document.getElementById(`${_0x5d6e}-exam-${_0x1e3f}`).value)||0;}const _0x7a8b=document.getElementById(`${_0x5d6e}-total-${_0x1e3f}`);_0x7a8b.innerText=_0x1f2e.toFixed(2);_0x7a8b.className=_0x1f2e>=10?"text-pass":"text-fail";const _0x9c0d=document.getElementById(`${_0x5d6e}-creditgain-${_0x1e3f}`);if(_0x1f2e>=10){_0x9c0d.innerText=_0x6e7f;_0x9c0d.style.color="#28a745";}else{_0x9c0d.innerText="0";_0x9c0d.style.color="#dc3545";}return _0x1f2e;};window.calculateAnnualGPA=function(){let _0x1a=0,_0x1b=0,_0x1c=0;s1Subjects.forEach((_0x1e,_0x1f)=>{let _0x20=window.updateRowScore('s1',_0x1f,_0x1e.hasTd,_0x1e.hasExam,_0x1e.credit);_0x1a+=_0x20*_0x1e.coeff;_0x1b+=_0x1e.coeff;if(_0x20>=10)_0x1c+=_0x1e.credit;});const _0x1d=_0x1a/_0x1b;const _0x1e=_0x1d>=10?30:_0x1c;let _0x2a=0,_0x2b=0,_0x2c=0;s2Subjects.forEach((_0x2e,_0x2f)=>{let _0x30=window.updateRowScore('s2',_0x2f,_0x2e.hasTd,_0x2e.hasExam,_0x2e.credit);_0x2a+=_0x30*_0x2e.coeff;_0x2b+=_0x2e.coeff;if(_0x30>=10)_0x2c+=_0x2e.credit;});const _0x2d=_0x2a/_0x2b;const _0x2e=_0x2d>=10?30:_0x2c;const _0x3a=(_0x1d+_0x2d)/2;const _0x3b=_0x3a>=10?60:(_0x1e+_0x2e);document.getElementById('s1-gpa-val').innerText=_0x1d.toFixed(2);document.getElementById('s1-gpa-val').className=_0x1d>=10?"text-pass":"text-fail";const _0x3c=document.getElementById('s1-credit-val');_0x3c.innerText=`رصيد السداسي 1: ${_0x1e} / 30`;_0x3c.style.color=_0x1d>=10?"#28a745":"#dc3545";document.getElementById('s2-gpa-val').innerText=_0x2d.toFixed(2);document.getElementById('s2-gpa-val').className=_0x2d>=10?"text-pass":"text-fail";const _0x3d=document.getElementById('s2-credit-val');_0x3d.innerText=`رصيد السداسي 2: ${_0x2e} / 30`;_0x3d.style.color=_0x2d>=10?"#28a745":"#dc3545";const _0x3e=document.getElementById('final-annual-box');if(_0x3a>=10){_0x3e.style.backgroundColor="#28a745";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> 🎯 مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 🎯 <br> 🎉 مبروك النجاح والقبول المباشر في السنة الثانية! 🎉`;}else if(_0x3b>=45){_0x3e.style.backgroundColor="#ffc107";_0x3e.style.color="#333";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> ⚠️ مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 ⚠️ <br> 💡 الحالة: انتقال بالديون (جمعت 45 رصيداً فأكثر، تنتقل للسنة الثانية مع إعادة المواد الراسبة) 💡`;}else{_0x3e.style.backgroundColor="#dc3545";_0x3e.style.color="white";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> ❌ مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 ❌ <br> الحالة: راسب (بانتظار الدورة الاستدراكية لتحسين المعدل والأرصدة)`;}document.getElementById('result-section').style.display="block";window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});};})();
     </script>
