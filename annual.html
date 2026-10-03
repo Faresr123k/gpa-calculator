@@ -1,4 +1,146 @@
-<script src="obfuscated%20(2).js"></script>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة المعدل السنوي</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        input[type="number"] {
+            width: 70px;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .text-pass { color: #27ae60; }
+        .text-fail { color: #e74c3c; }
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #eee;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        <h1>حاسبة المعدل السنوي</h1>
+
+        <!-- السداسي الأول -->
+        <h2>السداسي الأول</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>المادة</th>
+                    <th>المعامل</th>
+                    <th>الرصيد</th>
+                    <th>الامتحان</th>
+                    <th>المراقبة المستمرة</th>
+                </tr>
+            </thead>
+            <tbody id="s1-table">
+                <!-- أسطر مواد السداسي الأول -->
+            </tbody>
+        </table>
+
+        <!-- السداسي الثاني -->
+        <h2>السداسي الثاني</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>المادة</th>
+                    <th>المعامل</th>
+                    <th>الرصيد</th>
+                    <th>الامتحان</th>
+                    <th>المراقبة المستمرة</th>
+                </tr>
+            </thead>
+            <tbody id="s2-table">
+                <!-- أسطر مواد السداسي الثاني -->
+            </tbody>
+        </table>
+
+        <button onclick="calculateAnnual()">حساب المعدل السنوي</button>
+
+        <!-- قسم النتائج -->
+        <div id="result-section" style="display:none; margin-top: 20px;">
+            <div class="result-box" id="s1-res">
+                معدل السداسي الأول: <span id="s1-gpa-val">--</span>
+                <div class="badge" id="s1-credit-val">الرصيد: --</div>
+            </div>
+            
+            <div class="result-box" id="s2-res">
+                معدل السداسي الثاني: <span id="s2-gpa-val">--</span>
+                <div class="badge" id="s2-credit-val">الرصيد: --</div>
+            </div>
+
+            <div class="result-box" id="final-annual-box">
+                <!-- النتيجة النهائية تشمل المعدل والأرصدة الإجمالية -->
+            </div>
+        </div>
+    </div>
+
+    <!-- كود JavaScript المعتم المدمج -->
+    <script>
+    (function(_0x1a2b,_0x3c4d){const _0x5e6f=function(_0x7a8b){while(--_0x7a8b){_0x1a2b['push'](_0x1a2b['shift']());}};_0x5e6f(++_0x3c4d);}(['getElementById','value','innerText','style','display','block','toFixed','className','text-pass','text-fail','backgroundColor','color','s1-gpa-val','s2-gpa-val','s1-credit-val','s2-credit-val','final-annual-box','result-section','smooth','scrollTo','body','scrollHeight'],0x12a));const _0x8f9e=function(_0x1a2b,_0x3c4d){_0x1a2b=_0x1a2b-0x0;let _0x5e6f=['getElementById',_0x1a2b];return _0x5e6f;};function updaterRowScore(_0x1,_0x2,_0x3,_0x4,_0x5){const _0x6=parseFloat(document[_0x8f9e(0x0)](_0x1+'-exam-'+_0x2)?.[_0x8f9e(0x1)]||0x0);const _0x7=parseFloat(document[_0x8f9e(0x0)](_0x1+'-td-'+_0x2)?.[_0x8f9e(0x1)]||0x0);if(_0x3&&_0x4)return _0x6*0.6+_0x7*0.4;if(_0x3)return _0x6;if(_0x4)return _0x7;return 0x0;}function calculateAnnual(){let _0x11=0x0,_0x12=0x0,_0x13=0x0;typeof s1Subjects!=='undefined'&&s1Subjects.forEach((_0x1,_0x2)=>{let _0x3=updaterRowScore('s1',_0x2,_0x1.hasExam,_0x1.hasTd,_0x1.credit);_0x11+=_0x3*_0x1.coeff;_0x12+=_0x1.coeff;if(_0x3>=0xa)_0x13+=_0x1.credit;});const _0x14=_0x12>0x0?_0x11/_0x12:0x0;const _0x15=_0x14>=0xa?0x1e:_0x13;let _0x21=0x0,_0x22=0x0,_0x23=0x0;typeof s2Subjects!=='undefined'&&s2Subjects.forEach((_0x1,_0x2)=>{let _0x3=updaterRowScore('s2',_0x2,_0x1.hasExam,_0x1.hasTd,_0x1.credit);_0x21+=_0x3*_0x1.coeff;_0x22+=_0x1.coeff;if(_0x3>=0xa)_0x23+=_0x1.credit;});const _0x24=_0x22>0x0?_0x21/_0x22:0x0;const _0x25=_0x24>=0xa?0x1e:_0x23;const _0x31=(_0x14+_0x24)/0x2;const _0x32=_0x31>=0xa?0x3c:(_0x15+_0x25);const _0x33=document.getElementById('s1-gpa-val');if(_0x33){_0x33.innerText=_0x14.toFixed(0x2);_0x33.className=_0x14>=0xa?'text-pass':'text-fail';}const _0x34=document.getElementById('s1-credit-val');if(_0x34){_0x34.innerText='رصيد السداسي 1: '+_0x15+' / 30';_0x34.style.color=_0x14>=0xa?'#28a745':'#dc3545';}const _0x35=document.getElementById('s2-gpa-val');if(_0x35){_0x35.innerText=_0x24.toFixed(0x2);_0x35.className=_0x24>=0xa?'text-pass':'text-fail';}const _0x36=document.getElementById('s2-credit-val');if(_0x36){_0x36.innerText='رصيد السداسي 2: '+_0x25+' / 30';_0x36.style.color=_0x24>=0xa?'#28a745':'#dc3545';}const _0x37=document.getElementById('final-annual-box');if(_0x37){if(_0x31>=0xa){_0x37.style.backgroundColor='#28a745';_0x37.style.color='white';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> 🎉 مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}else if(_0x32>=0x2d){_0x37.style.backgroundColor='#ffc107';_0x37.style.color='#333';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> ⚠️ مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}else{_0x37.style.backgroundColor='#dc3545';_0x37.style.color='white';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> ❌ مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}}const _0x38=document.getElementById('result-section');if(_0x38)_0x38.style.display='block';window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+    </script>
 </body>
 </html>
