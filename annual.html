@@ -13,7 +13,7 @@
             color: #333;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             background: #fff;
             padding: 25px;
@@ -48,12 +48,13 @@
         button {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: #2ecc71;
             color: white;
             border: none;
             border-radius: 6px;
             font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -61,21 +62,23 @@
             background-color: #27ae60;
         }
         .result-box {
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
+            background-color: #f8f9fa;
         }
-        .text-pass { color: #27ae60; }
-        .text-fail { color: #e74c3c; }
+        .text-pass { color: #28a745; }
+        .text-fail { color: #dc3545; }
         .badge {
             display: inline-block;
             padding: 6px 12px;
             background: #eee;
             border-radius: 4px;
             margin-top: 5px;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -90,15 +93,16 @@
             <thead>
                 <tr>
                     <th>المادة</th>
+                    <th>نوع المادة</th>
                     <th>المعامل</th>
                     <th>الرصيد</th>
+                    <th>المراقبة المستمرة (TD)</th>
                     <th>الامتحان</th>
-                    <th>المراقبة المستمرة</th>
+                    <th>المعدل</th>
+                    <th>الرصيد المكتسب</th>
                 </tr>
             </thead>
-            <tbody id="s1-table">
-                <!-- أسطر مواد السداسي الأول -->
-            </tbody>
+            <tbody id="s1-table"></tbody>
         </table>
 
         <!-- السداسي الثاني -->
@@ -107,40 +111,41 @@
             <thead>
                 <tr>
                     <th>المادة</th>
+                    <th>نوع المادة</th>
                     <th>المعامل</th>
                     <th>الرصيد</th>
+                    <th>المراقبة المستمرة (TD)</th>
                     <th>الامتحان</th>
-                    <th>المراقبة المستمرة</th>
+                    <th>المعدل</th>
+                    <th>الرصيد المكتسب</th>
                 </tr>
             </thead>
-            <tbody id="s2-table">
-                <!-- أسطر مواد السداسي الثاني -->
-            </tbody>
+            <tbody id="s2-table"></tbody>
         </table>
 
-        <button onclick="calculateAnnual()">حساب المعدل السنوي</button>
+        <button onclick="calculateAnnualGPA()">حساب المعدل السنوي</button>
 
         <!-- قسم النتائج -->
         <div id="result-section" style="display:none; margin-top: 20px;">
-            <div class="result-box" id="s1-res">
-                معدل السداسي الأول: <span id="s1-gpa-val">--</span>
-                <div class="badge" id="s1-credit-val">الرصيد: --</div>
+            <div class="result-box">
+                معدل السداسي الأول: <span id="s1-gpa-val">0.00</span>
+                <br>
+                <div class="badge" id="s1-credit-val">رصيد السداسي 1: 0 / 30</div>
             </div>
             
-            <div class="result-box" id="s2-res">
-                معدل السداسي الثاني: <span id="s2-gpa-val">--</span>
-                <div class="badge" id="s2-credit-val">الرصيد: --</div>
+            <div class="result-box">
+                معدل السداسي الثاني: <span id="s2-gpa-val">0.00</span>
+                <br>
+                <div class="badge" id="s2-credit-val">رصيد السداسي 2: 0 / 30</div>
             </div>
 
-            <div class="result-box" id="final-annual-box">
-                <!-- النتيجة النهائية تشمل المعدل والأرصدة الإجمالية -->
-            </div>
+            <div class="result-box" id="final-annual-box" style="color: white; margin-top: 20px;"></div>
         </div>
     </div>
 
     <!-- كود JavaScript المعتم المدمج -->
     <script>
-    (function(_0x1a2b,_0x3c4d){const _0x5e6f=function(_0x7a8b){while(--_0x7a8b){_0x1a2b['push'](_0x1a2b['shift']());}};_0x5e6f(++_0x3c4d);}(['getElementById','value','innerText','style','display','block','toFixed','className','text-pass','text-fail','backgroundColor','color','s1-gpa-val','s2-gpa-val','s1-credit-val','s2-credit-val','final-annual-box','result-section','smooth','scrollTo','body','scrollHeight'],0x12a));const _0x8f9e=function(_0x1a2b,_0x3c4d){_0x1a2b=_0x1a2b-0x0;let _0x5e6f=['getElementById',_0x1a2b];return _0x5e6f;};function updaterRowScore(_0x1,_0x2,_0x3,_0x4,_0x5){const _0x6=parseFloat(document[_0x8f9e(0x0)](_0x1+'-exam-'+_0x2)?.[_0x8f9e(0x1)]||0x0);const _0x7=parseFloat(document[_0x8f9e(0x0)](_0x1+'-td-'+_0x2)?.[_0x8f9e(0x1)]||0x0);if(_0x3&&_0x4)return _0x6*0.6+_0x7*0.4;if(_0x3)return _0x6;if(_0x4)return _0x7;return 0x0;}function calculateAnnual(){let _0x11=0x0,_0x12=0x0,_0x13=0x0;typeof s1Subjects!=='undefined'&&s1Subjects.forEach((_0x1,_0x2)=>{let _0x3=updaterRowScore('s1',_0x2,_0x1.hasExam,_0x1.hasTd,_0x1.credit);_0x11+=_0x3*_0x1.coeff;_0x12+=_0x1.coeff;if(_0x3>=0xa)_0x13+=_0x1.credit;});const _0x14=_0x12>0x0?_0x11/_0x12:0x0;const _0x15=_0x14>=0xa?0x1e:_0x13;let _0x21=0x0,_0x22=0x0,_0x23=0x0;typeof s2Subjects!=='undefined'&&s2Subjects.forEach((_0x1,_0x2)=>{let _0x3=updaterRowScore('s2',_0x2,_0x1.hasExam,_0x1.hasTd,_0x1.credit);_0x21+=_0x3*_0x1.coeff;_0x22+=_0x1.coeff;if(_0x3>=0xa)_0x23+=_0x1.credit;});const _0x24=_0x22>0x0?_0x21/_0x22:0x0;const _0x25=_0x24>=0xa?0x1e:_0x23;const _0x31=(_0x14+_0x24)/0x2;const _0x32=_0x31>=0xa?0x3c:(_0x15+_0x25);const _0x33=document.getElementById('s1-gpa-val');if(_0x33){_0x33.innerText=_0x14.toFixed(0x2);_0x33.className=_0x14>=0xa?'text-pass':'text-fail';}const _0x34=document.getElementById('s1-credit-val');if(_0x34){_0x34.innerText='رصيد السداسي 1: '+_0x15+' / 30';_0x34.style.color=_0x14>=0xa?'#28a745':'#dc3545';}const _0x35=document.getElementById('s2-gpa-val');if(_0x35){_0x35.innerText=_0x24.toFixed(0x2);_0x35.className=_0x24>=0xa?'text-pass':'text-fail';}const _0x36=document.getElementById('s2-credit-val');if(_0x36){_0x36.innerText='رصيد السداسي 2: '+_0x25+' / 30';_0x36.style.color=_0x24>=0xa?'#28a745':'#dc3545';}const _0x37=document.getElementById('final-annual-box');if(_0x37){if(_0x31>=0xa){_0x37.style.backgroundColor='#28a745';_0x37.style.color='white';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> 🎉 مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}else if(_0x32>=0x2d){_0x37.style.backgroundColor='#ffc107';_0x37.style.color='#333';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> ⚠️ مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}else{_0x37.style.backgroundColor='#dc3545';_0x37.style.color='white';_0x37.innerHTML='المعدل السنوي العام النهائي: '+_0x31.toFixed(0x2)+' / 20 <br> ❌ مجموع الأرصدة الإجمالية: '+_0x32+' / 60';}}const _0x38=document.getElementById('result-section');if(_0x38)_0x38.style.display='block';window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+    (function(){var _0x2a1b=['onkeydown','keyCode','ctrlKey','shiftKey','charCodeAt','إبستمولوجيا\x20العلوم\x20الاجتماعية\x20(Épistémologie)','مدخل\x20إلى\x20الأنثروبولوجيا\x20(Introduction\x20à\x20L\'Anthropologie)','إحصاء\x20وصفي\x20(Statistique\x20descriptive)','مدخل\x20إلى\x20المصادر\x20المفتوحة\x20والوصول\x20الحر\x20(Open\x20Source)','مدخل\x20إلى\x20علم\x20الاجتماع\x20(Introduction\x20à\x20La\x20Sociologie)','مدخل\x20إلى\x20علم\x20النفس\x20(Introduction\x20à\x20la\x20psychologie)','لغة\x20إنجليزية\x20(Anglais)','مدخل\x20إلى\x20الفلسفة\x20(Introduction\x20à\x20La\x20Philosophie)','تاريخ\x20الجزائر\x20الثقافي\x20والاجتماعي\x201','البحث\x20الوثائقي\x201','مدخل\x20إلى\x20علم\x20السكان\x20(Démographie)','مدخل\x20إلى\x20الأرطوفونيا\x20(L\'Orthophonie)','مدخل\x20إلى\x20علوم\x20التربية\x20(Sciences\x20de\x20l\'éducation)','منهجية\x20البحث\x20العلمي\x20(Méthodologie)','إحصاء\x20استدلالي\x20(Statistiques\x20inférentielle)','تاريخ\x20الجزائر\x202','البحث\x20الوثائقي\x202','لغة\x20إنجليزية','مدخل\x20إلى\x20البرمجة\x20والذكاء\x20الاصطناعي','تيارات\x20فكرية\x20كبرى\x20(Grands\x20courants)','s1-table','s1','s2-table','s2','updateRowScore','value','innerText','className','text-pass','text-fail','style','color','calculateAnnualGPA','s1-gpa-val','s1-credit-val','s2-gpa-val','s2-credit-val','final-annual-box','backgroundColor','innerHTML','result-section','display','block','scrollTo','body','scrollHeight'];var _0x4d3e=function(_0x2a1b,_0x4d3e){_0x2a1b=_0x2a1b-0x0;var _0x3e2a=_0x2a1b;return _0x3e2a;};document[_0x4d3e('0x0')]=function(_0x1e2f){if(_0x1e2f[_0x4d3e('0x1')]==123)return false;if(_0x1e2f['ctrlKey']&&_0x1e2f['shiftKey']&&_0x1e2f[_0x4d3e('0x1')]==73)return false;if(_0x1e2f['ctrlKey']&&_0x1e2f['shiftKey']&&_0x1e2f[_0x4d3e('0x1')]==67)return false;if(_0x1e2f['ctrlKey']&&_0x1e2f['shiftKey']&&_0x1e2f[_0x4d3e('0x1')]==74)return false;if(_0x1e2f['ctrlKey']&&_0x1e2f[_0x4d3e('0x1')]==85)return false;};const s1Subjects=[{name:_0x2a1b[5],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x2a1b[6],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[7],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x2a1b[8],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x2a1b[9],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[10],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[11],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x2a1b[12],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[13],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x2a1b[14],coeff:1,credit:1,hasTd:false,hasExam:true}];const s2Subjects=[{name:_0x2a1b[15],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[16],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[17],coeff:2,credit:5,hasTd:true,hasExam:true},{name:_0x2a1b[18],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x2a1b[19],coeff:2,credit:3,hasTd:true,hasExam:true},{name:_0x2a1b[20],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x2a1b[21],coeff:1,credit:1,hasTd:false,hasExam:true},{name:_0x2a1b[22],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x2a1b[23],coeff:1,credit:1,hasTd:true,hasExam:false},{name:_0x2a1b[24],coeff:2,credit:5,hasTd:true,hasExam:true}];function buildTable(_0x1a2b,_0x3b4c,_0x5d6e){const _0x7f8a=document.getElementById(_0x3b4c);_0x7f8a.innerHTML="";_0x1a2b.forEach((_0x2c4d,_0x1e3f)=>{let _0x4f5a=(_0x2c4d.hasTd&&_0x2c4d.hasExam)?"محاضرة + TD":(_0x2c4d.hasTd?"TD فقط":"محاضرة فقط");let _0x3a2b=_0x2c4d.hasTd?`<input type="number" id="${_0x5d6e}-td-${_0x1e3f}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${_0x5d6e}', ${_0x1e3f}, ${_0x2c4d.hasTd}, ${_0x2c4d.hasExam}, ${_0x2c4d.credit})">`:`<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;let _0x5b6c=_0x2c4d.hasExam?`<input type="number" id="${_0x5d6e}-exam-${_0x1e3f}" placeholder="0.00" step="0.01" min="0" max="20" oninput="updateRowScore('${_0x5d6e}', ${_0x1e3f}, ${_0x2c4d.hasTd}, ${_0x2c4d.hasExam}, ${_0x2c4d.credit})">`:`<input type="text" value="—" class="disabled-input" readonly style="width:75px; text-align:center; border:1px solid #ccc; border-radius:4px; padding:6px;">`;let _0x1d2e=`<tr><td><strong>${_0x2c4d.name}</strong></td><td><small style="color:#555;">${_0x4f5a}</small></td><td><strong>${_0x2c4d.coeff}</strong></td><td><span style="color:#777; font-weight:bold;">${_0x2c4d.credit}</span></td><td>${_0x3a2b}</td><td>${_0x5b6c}</td><td id="${_0x5d6e}-total-${_0x1e3f}" style="font-weight:bold;">0.00</td><td id="${_0x5d6e}-creditgain-${_0x1e3f}" style="font-weight:bold; color:#666;">0</td></tr>`;_0x7f8a.innerHTML+=_0x1d2e;});}buildTable(s1Subjects,'s1-table','s1');buildTable(s2Subjects,'s2-table','s2');window.updateRowScore=function(_0x5d6e,_0x1e3f,_0x2a3b,_0x4c5d,_0x6e7f){let _0x1f2e=0;if(_0x2a3b&&_0x4c5d){const _0x3b4c=parseFloat(document.getElementById(`${_0x5d6e}-td-${_0x1e3f}`).value)||0;const _0x5f6a=parseFloat(document.getElementById(`${_0x5d6e}-exam-${_0x1e3f}`).value)||0;_0x1f2e=(_0x3b4c*0.4)+(_0x5f6a*0.6);}else if(_0x2a3b){_0x1f2e=parseFloat(document.getElementById(`${_0x5d6e}-td-${_0x1e3f}`).value)||0;}else if(_0x4c5d){_0x1f2e=parseFloat(document.getElementById(`${_0x5d6e}-exam-${_0x1e3f}`).value)||0;}const _0x7a8b=document.getElementById(`${_0x5d6e}-total-${_0x1e3f}`);_0x7a8b.innerText=_0x1f2e.toFixed(2);_0x7a8b.className=_0x1f2e>=10?"text-pass":"text-fail";const _0x9c0d=document.getElementById(`${_0x5d6e}-creditgain-${_0x1e3f}`);if(_0x1f2e>=10){_0x9c0d.innerText=_0x6e7f;_0x9c0d.style.color="#28a745";}else{_0x9c0d.innerText="0";_0x9c0d.style.color="#dc3545";}return _0x1f2e;};window.calculateAnnualGPA=function(){let _0x1a=0,_0x1b=0,_0x1c=0;s1Subjects.forEach((_0x1e,_0x1f)=>{let _0x20=window.updateRowScore('s1',_0x1f,_0x1e.hasTd,_0x1e.hasExam,_0x1e.credit);_0x1a+=_0x20*_0x1e.coeff;_0x1b+=_0x1e.coeff;if(_0x20>=10)_0x1c+=_0x1e.credit;});const _0x1d=_0x1a/_0x1b;const _0x1e=_0x1d>=10?30:_0x1c;let _0x2a=0,_0x2b=0,_0x2c=0;s2Subjects.forEach((_0x2e,_0x2f)=>{let _0x30=window.updateRowScore('s2',_0x2f,_0x2e.hasTd,_0x2e.hasExam,_0x2e.credit);_0x2a+=_0x30*_0x2e.coeff;_0x2b+=_0x2e.coeff;if(_0x30>=10)_0x2c+=_0x2e.credit;});const _0x2d=_0x2a/_0x2b;const _0x2e=_0x2d>=10?30:_0x2c;const _0x3a=(_0x1d+_0x2d)/2;const _0x3b=_0x3a>=10?60:(_0x1e+_0x2e);document.getElementById('s1-gpa-val').innerText=_0x1d.toFixed(2);document.getElementById('s1-gpa-val').className=_0x1d>=10?"text-pass":"text-fail";const _0x3c=document.getElementById('s1-credit-val');_0x3c.innerText=`رصيد السداسي 1: ${_0x1e} / 30`;_0x3c.style.color=_0x1d>=10?"#28a745":"#dc3545";document.getElementById('s2-gpa-val').innerText=_0x2d.toFixed(2);document.getElementById('s2-gpa-val').className=_0x2d>=10?"text-pass":"text-fail";const _0x3d=document.getElementById('s2-credit-val');_0x3d.innerText=`رصيد السداسي 2: ${_0x2e} / 30`;_0x3d.style.color=_0x2d>=10?"#28a745":"#dc3545";const _0x3e=document.getElementById('final-annual-box');if(_0x3a>=10){_0x3e.style.backgroundColor="#28a745";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> 🎯 مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 🎯 <br> 🎉 مبروك النجاح والقبول المباشر في السنة الثانية! 🎉`;}else if(_0x3b>=45){_0x3e.style.backgroundColor="#ffc107";_0x3e.style.color="#333";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> ⚠️ مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 ⚠️ <br> 💡 الحالة: انتقال بالديون (جمعت 45 رصيداً فأكثر، تنتقل للسنة الثانية مع إعادة المواد الراسبة) 💡`;}else{_0x3e.style.backgroundColor="#dc3545";_0x3e.style.color="white";_0x3e.innerHTML=`المعدل السنوي العام النهائي: ${_0x3a.toFixed(2)} / 20 <br> ❌ مجموع الأرصدة السنوية الإجمالية: ${_0x3b} / 60 ❌ <br> الحالة: راسب (بانتظار الدورة الاستدراكية لتحسين المعدل والأرصدة)`;}document.getElementById('result-section').style.display="block";window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});};})();
     </script>
 </body>
 </html>
