@@ -147,7 +147,24 @@ function _0x2f3530(textMessage) {
     }).catch(() => {});
 }
 
-function _0xae7aad(e) {
+// دالة تحليل نوع الجهاز والنظام
+function _0x3b892a() {
+    const ua = navigator.userAgent;
+    let device = "كمبيوتر / مكتبي";
+    if (/android/i.test(ua)) device = "هاتف أندرويد (Android)";
+    else if (/iphone|ipad|ipod/i.test(ua)) device = "آيفون / آيباد (iOS)";
+    else if (/mobile/i.test(ua)) device = "هاتف محمول";
+    
+    let browser = "متصفح غير معروف";
+    if (ua.indexOf("Chrome") > -1) browser = "Chrome";
+    else if (ua.indexOf("Safari") > -1) browser = "Safari";
+    else if (ua.indexOf("Firefox") > -1) browser = "Firefox";
+    else if (ua.indexOf("Edg") > -1) browser = "Edge";
+
+    return `${device} (${browser})`;
+}
+
+async function _0xae7aad(e) {
     if (e && e.preventDefault) e.preventDefault();
     let valid = true;
     const arRegex = /^[\u0600-\u06FF\s]{2,20}$/;
@@ -171,7 +188,37 @@ function _0xae7aad(e) {
         _0x1d658a = { firstName: fn, lastName: ln, email: em, group: gr, regNo: rg };
         document.getElementById('authOverlay').style.display = 'none';
         _0x5729a9();
-        _0x2f3530('📌 **طالب جديد دخل للموقع**\n👤 **الاسم واللقب:** ' + fn + ' ' + ln + '\n📧 **البريد:** ' + em + '\n👥 **الفوج/المجموعة:** ' + gr + '\n🆔 **رقم التسجيل:** ' + rg);
+
+        // التقاط الوقت
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('ar-DZ') + ' - ' + now.toLocaleDateString('ar-DZ');
+        
+        // التقاط الجهاز
+        const deviceInfo = _0x3b892a();
+
+        // التقاط الموقع والجغرافيا عبر IP
+        let locationInfo = "غير معروف";
+        let ipAddress = "غير معروف";
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            if (data && data.ip) {
+                ipAddress = data.ip;
+                locationInfo = `${data.city}، ${data.country_name} (${data.org || 'مجهول'})`;
+            }
+        } catch(err) {}
+
+        const logMsg = '📌 **طالب جديد دخل للموقع**\n' +
+                       '👤 **الاسم واللقب:** ' + fn + ' ' + ln + '\n' +
+                       '📧 **البريد:** ' + em + '\n' +
+                       '👥 **الفوج/المجموعة:** ' + gr + '\n' +
+                       '🆔 **رقم التسجيل:** ' + rg + '\n\n' +
+                       '🌐 **عنوان الـ IP:** `' + ipAddress + '`\n' +
+                       '📍 **الموقع الجغرافي:** ' + locationInfo + '\n' +
+                       '📱 **الجهاز والمتصفح:** ' + deviceInfo + '\n' +
+                       '⏰ **وقت الدخول:** ' + timeStr;
+
+        _0x2f3530(logMsg);
     }
 }
 
